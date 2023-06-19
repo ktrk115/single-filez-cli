@@ -52,6 +52,7 @@ const args = require("yargs")
 		"browser-script": [],
 		"browser-stylesheet": [],
 		"browser-args": "",
+		"browser-device": "",
 		"browser-start-minimized": false,
 		"browser-cookie": [],
 		"browser-cookies-file": "",
@@ -147,6 +148,8 @@ const args = require("yargs")
 	.array("browser-stylesheet")
 	.options("browser-args", { description: "Arguments provided as a JSON array and passed to the browser (puppeteer, webdriver-gecko, webdriver-chromium)" })
 	.string("browser-args")
+	.options("browser-device", { description: "Name of the device to emulate (puppeteer)" })
+	.string("browser-device")
 	.options("browser-start-minimized", { description: "Minimize the browser (puppeteer)" })
 	.boolean("browser-start-minimized")
 	.options("browser-cookie", { description: "Ordered list of cookie parameters separated by a comma: name,value,domain,path,expires,httpOnly,secure,sameSite,url (puppeteer, webdriver-gecko, webdriver-chromium, jsdom)" })

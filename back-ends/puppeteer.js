@@ -117,6 +117,9 @@ async function setPageOptions(page, options) {
 	if (options.emulateMediaFeatures) {
 		await page.emulateMediaFeatures(options.emulateMediaFeatures);
 	}
+	if (options.browserDevice) {
+		await page.emulate(puppeteer.KnownDevices[options.browserDevice]);
+	}
 	if (options.httpProxyServer && (options.httpProxyUsername || options.httpProxyPassword)) {
 		await page.authenticate({
 			username: options.httpProxyUsername,
