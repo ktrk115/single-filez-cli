@@ -197,10 +197,15 @@ async function pageGoto(page, options) {
 		timeout: options.browserLoadMaxTime || 0,
 		waitUntil: options.browserWaitUntil || NETWORK_IDLE_STATE
 	};
+	var response;
 	if (options.content) {
-		await page.goto(options.url, { waitUntil: "domcontentloaded" });
+		response = await page.goto(options.url, { waitUntil: "domcontentloaded" });
 		await page.setContent(options.content, loadOptions);
 	} else {
-		await page.goto(options.url, loadOptions);
+		response = await page.goto(options.url, loadOptions);
+	}
+	if (response.status() < 200 || 300 <= response.status()) {
+		process.exitCode = 1;
+		throw new Error(`Got response '${response.status()}'`);
 	}
 }
